@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  honorific: MyString
+  last_name: MyString
+  middle_name: MyString
+  first_name: MyString
+  suffix: MyString
+  gender: MyString
+  ttu_email: MyString
+  ttu_phone: MyString
+  ttu_termination: false
+  termination_reason: MyString
+
+two:
+  honorific: MyString
+  last_name: MyString
+  middle_name: MyString
+  first_name: MyString
+  suffix: MyString
+  gender: MyString
+  ttu_email: MyString
+  ttu_phone: MyString
+  ttu_termination: false
+  termination_reason: MyString
