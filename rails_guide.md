@@ -406,5 +406,5 @@ class PostgreSQLAdapter < AbstractAdapter
       }
 ```
 
-[PostgreSQL Data Types Implemented in RoR](https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L69 "PostgreSQL Data Types Implemented in RoR")
-[PostgreSQL Data Types Reference](https://www.postgresql.org/docs/11/datatype.html "PostgreSQL Data Types Reference")
+- [PostgreSQL Data Types Implemented in RoR](https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L69 "PostgreSQL Data Types Implemented in RoR")
+- [PostgreSQL Data Types Reference](https://www.postgresql.org/docs/11/datatype.html "PostgreSQL Data Types Reference")
