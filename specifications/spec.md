@@ -2,11 +2,10 @@
 
 Specs:
 - [x] Include spec.md
-- [ ] Use Ruby on Rails backend and frontend
-- [ ] Use Entity Relationship Diagram as a guideline to design the following models
-- [ ] Has >=1 `has_many` relationship.
-- [ ] Has >=1 `belongs_to` relationship
-- [ ] Has >=2 `has_many :through` relationships
+- [x] Use Entity Relationship Diagram as a guideline to design the following models
+- [ ] Has >=1 `has_many` relationship (people -> education)
+- [ ] Has >=1 `belongs_to` relationship (education -> people)
+- [ ] Has >=2 `has_many :through` relationships   
 - [ ] Has =1 many-to-many relationship(s) implemented with `has_many :through` relationship ([HABTM is bad](https://flatironschool.com/blog/why-you-dont-need-has-and-belongs-to-many/ "HABTM is bad"))
 - [ ] Join table for many-to-many relationship has >= 1 field other than FK which can be submitted by user UI
 - [ ] Models defend against invalid data by the inclusion of validations
@@ -24,7 +23,8 @@ Specs:
 - [ ] a. logic in controllers encapsulated as methods in models
 - [ ] b. views use helper methods and partials when appropriate
 - [ ] c. follow patterns in Rails and Ruby style guides (linked below)
-- [ ] *DO NOT* use scaffolding generators
+- [ ] Use Ruby on Rails backend and frontend
+- [x] *DO NOT* use scaffolding generators
 
 Confirm:
 - [ ] You have a large number of small Git commits
