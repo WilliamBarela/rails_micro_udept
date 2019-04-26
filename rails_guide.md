@@ -58,8 +58,8 @@ In specific, they orchestrate the basic framework (which can be customized as yo
 Controllers also have the very important task of sanitizing such requests by using the private methods and params to control what fields are available.
 Params is an absolute necessity to ensure security of your database so that malicious HTTP request cannot get what it requests.
 
-## Generating Migrations, Models, Scaffolds, etc.
-For full details, please refer to the **Active Record Migrations** docs.
+## Generating Migrations, Models, Controllers, Resources, Scaffolds, etc.
+For full details, please refer to the **Active Record Migrations** docs. For a quick reference, run `rails generate --help`
 
 The rails cli utility offers many time saving shortcuts which allow you to flesh out a 
 a working application in a few in the terminal. Rails of course is a very opinionated
@@ -259,6 +259,60 @@ Running via Spring preloader in process 10249
 ```
 
 Models also add a timestamp to the migration files by default (which does not happen when you create a stand alone migration).
+
+### Controllers
+
+Controller generators must be invoked in the singular. Controller generators create both the controllers and the views which are associated with them. Unlike resource generators, they do not create the resourceful routes in `config/routes.rb`...and that's a good thing when one is making nested routes.
+
+```bash
+rails g controller Person
+Running via Spring preloader in process 11600
+      create  app/controllers/person_controller.rb
+      invoke  erb
+      create    app/views/person
+      invoke  test_unit
+      create    test/controllers/person_controller_test.rb
+      invoke  helper
+      create    app/helpers/person_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/person.coffee
+      invoke    scss
+      create      app/assets/stylesheets/person.scss
+```
+
+### Resources
+
+Resource generators must be invoked in the singular. Resources generate  the same classes as a model generator (the migration, the model, the test_unit); however, they also generate the controllers and their helper methods and the resourceful routing by default.
+In essense, `rails g resource` is equivalent to `rails g model` and `rails g controller` combined without the resourceful routes being included (i.e., the additional line in `config/routes.rb`).
+
+```bash
+rails g resource Person
+Running via Spring preloader in process 11240
+      invoke  active_record
+      create    db/migrate/20190426055410_create_people.rb
+      create    app/models/person.rb
+      invoke    test_unit
+      create      test/models/person_test.rb
+      create      test/fixtures/people.yml
+      invoke  controller
+      create    app/controllers/people_controller.rb
+      invoke    erb
+      create      app/views/people
+      invoke    test_unit
+      create      test/controllers/people_controller_test.rb
+      invoke    helper
+      create      app/helpers/people_helper.rb
+      invoke      test_unit
+      invoke    assets
+      invoke      coffee
+      create        app/assets/javascripts/people.coffee
+      invoke      scss
+      create        app/assets/stylesheets/people.scss
+      invoke  resource_route
+       route    resources :people
+```
 
 ### Useful Rake Task Added in this Code Base
 
