@@ -336,6 +336,13 @@ end
 Thus, if one invokes `rake log db:migrate` or `rake log db:rollback`, one can see exactly what rails has done and what SQL command was used to complete a particular migration.
 
 ### Data types available in PostgreSQL and implemented in Ruby on Rails:
+PostgreSQL has a very rich support for several different datatypes. However, as Rails and the, pg gem in particular, is acting as an ORM which communicates with PostgreSQL and one
+of the main purposes of Rails is to provide cross functionality across several different RDBMS, only a limited set of the following datatypes are supported (still quite a few):
+
+##### PostgreSQL Data Types:
+
+![PostgreSQL 11 Data Types](https://raw.githubusercontent.com/WilliamBarela/rails_micro_udept/people_migrations/specifications/assets/postgresql_11_data_types.png "PostgreSQL 11 Data Types")
+
 From Rails ActiveRecord > connection adapters > postgresql adapter
 
 ```ruby
@@ -400,3 +407,4 @@ class PostgreSQLAdapter < AbstractAdapter
 ```
 
 [PostgreSQL Data Types Implemented in RoR](https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L69 "PostgreSQL Data Types Implemented in RoR")
+[PostgreSQL Data Types Reference](https://www.postgresql.org/docs/11/datatype.html "PostgreSQL Data Types Reference")
