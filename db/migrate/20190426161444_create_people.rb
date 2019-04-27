@@ -6,7 +6,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.string :middle_name, comment: "person middle name (optional)"
       t.string :first_name, comment: "person given name"
       t.string :suffix, comment: "person suffix: I, II, Jr., Sr., ..."
-      t.string :gender, comment: "person gender: female, male, they"
+      t.string :gender, comment: "person gender: female, male, non-binary"
       t.string :ttu_email, comment: "person TTU email username@ttu.edu, username@ttuhsc.edu"
       t.string :ttu_phone, comment: "work phone"
       t.boolean :ttu_termination, comment: "date of dissociation from TTU"
