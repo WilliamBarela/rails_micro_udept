@@ -8,4 +8,4 @@ rails g model FacultyMember current_title:string auxiliary_roles:text objectives
 rails g model StaffMember current_title:string auxiliary_roles:text departmental?:boolean objectives_statement:text departmental_impact_statement:text role_termination_date:date termination_reason:string person:references
 
 # generate GraduateStudent model
-rails g model GraduateStudent current_program:string degree_sought:string auxiliary_roles:string expected_graduation_date:date objectives_statement:text research_interests_summary:text termination_reason:string person:references
+rails g model GraduateStudent current_program:string degree_sought:string auxiliary_roles:string expected_graduation_year:integer expected_graduation_semester:string objectives_statement:text research_interests_summary:text role_termination_date:date termination_reason:string person:references
