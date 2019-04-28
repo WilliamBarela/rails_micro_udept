@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  current_title: MyString
+  auxiliary_roles: MyText
+  departmental?: false
+  objectives_statement: MyText
+  departmental_impact_statement: MyText
+  role_termination_date: 2019-04-28
+  termination_reason: MyString
+  person: one
+
+two:
+  current_title: MyString
+  auxiliary_roles: MyText
+  departmental?: false
+  objectives_statement: MyText
+  departmental_impact_statement: MyText
+  role_termination_date: 2019-04-28
+  termination_reason: MyString
+  person: two
