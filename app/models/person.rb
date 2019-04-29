@@ -3,6 +3,6 @@ class Person < ApplicationRecord
   has_many :staff_members
   has_many :graduate_students
 
-  has_many :committee_members                       # semantically this would be better with committee_memberships...
-  has_many :committees, through: :committee_members # change to committee_memberships to improve semantics?
+  has_many :committee_memberships
+  has_many :committees, through: :committee_memberships
 end
