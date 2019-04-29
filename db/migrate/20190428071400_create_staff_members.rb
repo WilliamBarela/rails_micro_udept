@@ -8,7 +8,7 @@ class CreateStaffMembers < ActiveRecord::Migration[5.2]
       t.text :departmental_impact_statement, comment: "paragraph(s) stating summary of staff member's planned departmental impact"
       t.date :role_termination_date, comment: "date in which faculty role finished"
       t.string :termination_reason, comment: "default: null; contract ended, fired, quit, ..."
-      t.references :person, foreign_key: true, comment: "one person to possibly many staff roles"
+      t.references :person, index: true, foreign_key: true, comment: "one person to possibly many staff roles"
 
       t.timestamps
     end

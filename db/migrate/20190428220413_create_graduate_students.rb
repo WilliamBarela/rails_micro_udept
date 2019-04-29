@@ -10,7 +10,7 @@ class CreateGraduateStudents < ActiveRecord::Migration[5.2]
       t.text :research_interests_summary, comment: "paragraph(s) stating summary of research interests"
       t.date :role_termination_date, comment: "date in which graduate current_program role finished"
       t.string :termination_reason, comment: "default: null; contract ended, fired, quit, ..."
-      t.references :person, foreign_key: true, comment: "one person to possibly many graduate student roles"
+      t.references :person, index: true, foreign_key: true, comment: "one person to possibly many graduate student roles"
 
       t.timestamps
     end
