@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role: MyString
+  join_date: 2019-04-29
+  termination_date: 2019-04-29
+  person: one
+  committee: one
+
+two:
+  role: MyString
+  join_date: 2019-04-29
+  termination_date: 2019-04-29
+  person: two
+  committee: two

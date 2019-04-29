@@ -13,5 +13,5 @@ rails g model GraduateStudent current_program:string degree_sought:string auxili
 # generate Committees model:
 rails g model Committee committee_title:string committee_description:text committee_started:date committee_depricated:date
 
-# generate CommitteeMembers model (join table)
-rails g model CommitteeMember role:string join_date:date termination_date:date person:belongs_to{index} committee:belongs_to{index}
+# generate CommitteeMemberships model (join table)
+rails g model CommitteeMembership role:string join_date:date termination_date:date person:belongs_to{index} committee:belongs_to{index}
