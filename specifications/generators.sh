@@ -15,3 +15,4 @@ rails g model Committee committee_title:string committee_description:text commit
 
 # generate CommitteeMemberships model (join table)
 rails g model CommitteeMembership role:string join_date:date termination_date:date person:belongs_to{index} committee:belongs_to{index}
+rails g model GraduateAdvisorhip primary_advisor?:boolean advising_initiation:date advising_termination:date faculty_member:belongs_to{index} graduate_student:belongs_to{index}
