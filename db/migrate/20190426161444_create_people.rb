@@ -9,7 +9,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.string :gender, comment: "person gender: female, male, non-binary"
       t.string :ttu_email, comment: "person TTU email username@ttu.edu, username@ttuhsc.edu"
       t.integer :ttu_phone, comment: "work phone"
-      t.date :ttu_termination, comment: "date of dissociation from TTU"
+      t.date :ttu_termination_date, comment: "date of dissociation from TTU"
       t.string :termination_reason, comment: "reason for dissociation from TTU"
 
       t.timestamps
