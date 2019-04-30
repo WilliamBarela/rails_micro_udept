@@ -7,8 +7,12 @@ class Person < ApplicationRecord
   has_many :committees, through: :committee_memberships
 
   # string validations
-  validates :honorific, :last_name, :middle_name, :first_name, :suffix, :gender, :ttus_termination_reason,
+
+  validates :honorific, :last_name, :first_name, :gender,
     format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" }
+  validates :middle_name, :suffix, :ttus_phone, :ttus_termination_date, :ttus_termination_reason,
+    format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" },
+    allow_nil: true
   validates :honorific,
     length: { minimum: 2 }
   validates :last_name, :middle_name, :first_name,
