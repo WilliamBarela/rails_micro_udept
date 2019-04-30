@@ -16,4 +16,16 @@ class Person < ApplicationRecord
   validates :suffix,
     length: { in: 1..4 }
 
+  validate :valid_ttus_email?
+
+  def valid_ttus_email?
+    valid_ttus_emails = [
+      /\A[a-zA-Z0-9\-\.]+@ttu\.edu\z/i,
+      /\A[a-zA-Z0-9\-\.]+@ttuhsc\.edu\z/i
+    ]
+
+    unless valid_ttus_emails.any? {|email| email.match(self.ttus_email)}
+      errors.add(:ttus_email, "Please enter your valid TTU or TTUHSC email.")
+    end
+  end
 end
