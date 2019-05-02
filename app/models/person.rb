@@ -20,12 +20,12 @@ class Person < ApplicationRecord
   validates :suffix,
     length: { in: 1..4 }
 
+  validate :is_valid_honorific?
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
   # fields to be validated
   
-  # self.honorific
   # self.last_name
   # self.middle_name
   # self.first_name
@@ -36,11 +36,24 @@ class Person < ApplicationRecord
   # self.ttus_termination_date
   # self.ttus_termination_reason
 
-  def is_allowed_text?(field)
-    text_pattern = /\A[a-zA-Z\- ]+\z/
+  # regex incantations
+  abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
+  text_with_spaces        = /\A[a-zA-Z\- ]+\z/
+  text_without_spaces     = /\A[a-zA-Z\-]+\z/
+
+  # error_messages
+  invalid_text_error = "only letters and hyphens allowed"
+  invalid_honorific_error = "only letters and periods are allowed"
+
+  def is_allowed_text?(field, text_pattern)
     field.match?(text_pattern)
   end
 
+  def is_valid_honorific?
+    unless self.honorific.nil? or is_allowed_text?(self.honorific, abbreviation_singleton)
+      errors.add(:honorific, invalid_honorific_error)
+    end
+  end
 
   def valid_ttus_phone?
     valid_ttus_phones = [
