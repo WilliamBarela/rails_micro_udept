@@ -45,10 +45,12 @@ class Person < ApplicationRecord
   invalid_abbreviation_error  = "only letters and periods are allowed"
   invalid_text_w_space_error  = "only letters, hyphens, and spaces allowed"
   invalid_text_wo_space_error = "only letters and hyphens allowed"
+  invalid_text_length_error   = " is improper length"
 
   def valid_honorific?
-    unless self.honorific.nil? or self.honorific.match?(abbreviation_singleton)
-      errors.add(:honorific, invalid_abbreviation_error)
+    unless self.honorific.nil?
+      errors.add(:honorific, invalid_abbreviation_error) unless self.honorific.match?(abbreviation_singleton)
+      errors.add(:honorific, "honorific #{invalid_text_length_error}") unless self.honorific.length.between?(2,50)
     end
   end
 
