@@ -10,7 +10,7 @@ class Person < ApplicationRecord
 
   validates :honorific, :last_name, :first_name, :gender,
     format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" }
-  validates :middle_name, :suffix, :ttus_phone, :ttus_termination_date, :ttus_termination_reason,
+  validates :middle_name, :suffix, :ttus_termination_date, :ttus_termination_reason,
     format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" },
     allow_nil: true
   validates :honorific,
@@ -20,7 +20,19 @@ class Person < ApplicationRecord
   validates :suffix,
     length: { in: 1..4 }
 
+  validate :valid_ttus_phone?
   validate :valid_ttus_email?
+
+  def valid_ttus_phone?
+    valid_ttus_phones = [
+      /\A806834[\d]{4}\z/,
+      /\A806742[\d]{4}\z/
+    ]
+
+    unless valid_ttus_phones.any? {|phone| phone.match(self.ttus_phone)}
+      errors.add(:ttus_phone, "Please enter your valid TTU or TTUHSC phone number")
+    end
+  end
 
   def valid_ttus_email?
     valid_ttus_emails = [
