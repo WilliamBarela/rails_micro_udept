@@ -23,6 +23,25 @@ class Person < ApplicationRecord
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
+  # fields to be validated
+  
+  # self.honorific
+  # self.last_name
+  # self.middle_name
+  # self.first_name
+  # self.suffix
+  # self.gender
+  # self.ttus_email
+  # self.ttus_phone
+  # self.ttus_termination_date
+  # self.ttus_termination_reason
+
+  def is_allowed_text?(field)
+    text_pattern = /\A[a-zA-Z\- ]+\z/
+    field.match?(text_pattern)
+  end
+
+
   def valid_ttus_phone?
     valid_ttus_phones = [
       /\A806834[\d]{4}\z/,
