@@ -40,7 +40,6 @@ class Person < ApplicationRecord
   abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
   text_with_spaces        = /\A[a-zA-Z\- ]+\z/
   text_without_spaces     = /\A[a-zA-Z\-]+\z/
-  ttus_phone              = /\A\(?806\)?[\.|\-| ]?(834|742)[\.|\-| ]?[\d]{4}\z/
 
   # error_messages
   invalid_text_error = "only letters and hyphens allowed"
@@ -57,18 +56,17 @@ class Person < ApplicationRecord
   end
 
   def valid_ttus_phone?
-    unless self.ttus_phone.nil? or self.ttus_phone.match?(ttus_phone)
+    ttus_phone_pattern = /\A\(?806\)?[\.|\-| ]?(834|742)[\.|\-| ]?[\d]{4}\z/
+
+    unless self.ttus_phone.nil? or self.ttus_phone.match?(ttus_phone_pattern)
       errors.add(:ttus_phone, "Please enter your valid TTU or TTUHSC phone number")
     end
   end
 
   def valid_ttus_email?
-    valid_ttus_emails = [
-      /\A[a-zA-Z0-9\-\.]+@ttu\.edu\z/i,
-      /\A[a-zA-Z0-9\-\.]+@ttuhsc\.edu\z/i
-    ]
+    ttus_email_pattern = /\A[a-zA-Z0-9\-\.]+@ttu(hsc)?\.edu\z/i
 
-    unless valid_ttus_emails.any? {|email| email.match(self.ttus_email)}
+    unless self.ttus_email.nil? or self.ttus_email.match?(ttus_email_pattern)
       errors.add(:ttus_email, "Please enter your valid TTU or TTUHSC email.")
     end
   end
