@@ -36,10 +36,11 @@ class Person < ApplicationRecord
   # self.ttus_termination_date
   # self.ttus_termination_reason
 
-  # regex incantations
+  # regex text incantations
   abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
   text_with_spaces        = /\A[a-zA-Z\- ]+\z/
   text_without_spaces     = /\A[a-zA-Z\-]+\z/
+  ttus_phone              = /\A\(?806\)?[\.|\-| ]?(834|742)[\.|\-| ]?[\d]{4}\z/
 
   # error_messages
   invalid_text_error = "only letters and hyphens allowed"
@@ -49,19 +50,14 @@ class Person < ApplicationRecord
     field.match?(text_pattern)
   end
 
-  def is_valid_honorific?
+  def valid_honorific?
     unless self.honorific.nil? or is_allowed_text?(self.honorific, abbreviation_singleton)
       errors.add(:honorific, invalid_honorific_error)
     end
   end
 
   def valid_ttus_phone?
-    valid_ttus_phones = [
-      /\A806834[\d]{4}\z/,
-      /\A806742[\d]{4}\z/
-    ]
-
-    unless valid_ttus_phones.any? {|phone| phone.match(self.ttus_phone)}
+    unless self.ttus_phone.nil? or self.ttus_phone.match?(ttus_phone)
       errors.add(:ttus_phone, "Please enter your valid TTU or TTUHSC phone number")
     end
   end
