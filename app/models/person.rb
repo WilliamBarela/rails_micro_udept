@@ -20,7 +20,7 @@ class Person < ApplicationRecord
   validates :suffix,
     length: { in: 1..4 }
 
-  validate :is_valid_honorific?
+  validate :valid_honorific?
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
@@ -43,15 +43,15 @@ class Person < ApplicationRecord
 
   # error_messages
   invalid_text_error = "only letters and hyphens allowed"
-  invalid_honorific_error = "only letters and periods are allowed"
+  invalid_abbreviation_error = "only letters and periods are allowed"
 
   def is_allowed_text?(field, text_pattern)
     field.match?(text_pattern)
   end
 
   def valid_honorific?
-    unless self.honorific.nil? or is_allowed_text?(self.honorific, abbreviation_singleton)
-      errors.add(:honorific, invalid_honorific_error)
+    unless self.honorific.nil? or self.honorific.match?(abbreviation_singleton)
+      errors.add(:honorific, invalid_abbreviation_error)
     end
   end
 
