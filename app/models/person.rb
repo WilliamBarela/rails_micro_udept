@@ -6,35 +6,13 @@ class Person < ApplicationRecord
   has_many :committee_memberships
   has_many :committees, through: :committee_memberships
 
-  # string validations
+  validates :last_name, :first_name, :gender, :ttus_email
+    presence: true,
+    on: :update
 
-  validates :honorific, :last_name, :first_name, :gender,
-    format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" }
-  validates :middle_name, :suffix, :ttus_termination_date, :ttus_termination_reason,
-    format: { with: /\A[a-zA-Z\-]+\z/, message: "only letters and hyphens allowed" },
-    allow_nil: true
-  validates :honorific,
-    length: { minimum: 2 }
-  validates :last_name, :middle_name, :first_name,
-    length: { in: 2..50 }
-  validates :suffix,
-    length: { in: 1..4 }
-
-  validate :valid_honorific?
+  validate :valid_name?
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
-
-  # fields to be validated
-  
-  # self.last_name
-  # self.middle_name
-  # self.first_name
-  # self.suffix
-  # self.gender
-  # self.ttus_email
-  # self.ttus_phone
-  # self.ttus_termination_date
-  # self.ttus_termination_reason
 
   # regex text incantations
   abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
@@ -45,12 +23,33 @@ class Person < ApplicationRecord
   invalid_abbreviation_error  = "only letters and periods are allowed"
   invalid_text_w_space_error  = "only letters, hyphens, and spaces allowed"
   invalid_text_wo_space_error = "only letters and hyphens allowed"
-  invalid_text_length_error   = " is improper length"
+  invalid_text_length_error   = "is improper length"
 
-  def valid_honorific?
-    unless self.honorific.nil?
-      errors.add(:honorific, invalid_abbreviation_error) unless self.honorific.match?(abbreviation_singleton)
-      errors.add(:honorific, "honorific #{invalid_text_length_error}") unless self.honorific.length.between?(2,50)
+  def valid_name?
+    # honorific and suffix
+    [self.honorific, self.suffix].each do |field|
+      field_sym = field.to_sym
+      unless field.nil?
+        errors.add(field_sym, invalid_abbreviation_error) unless field.match?(abbreviation_singleton)
+        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,4)
+      end
+    end
+
+    # names:
+    [self.first_name, self.middle_name, self.last_name].each do |field|
+      field_sym = field.to_sym
+      unless field.nil?
+        errors.add(field_sym, invalid_text_wo_space_error) unless field.match?(text_wo_spaces)
+        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,50)
+      end
+    end
+  end
+
+  def valid_gender?
+    gender_options = ["female", "male", "other"]
+
+    unless self.gender.nil? or gender_options.any? {|gender_option| self.gender.match?(gender_option)}
+      error.add(:gender, "Please input gender: female, male or other")
     end
   end
 
