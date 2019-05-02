@@ -38,16 +38,13 @@ class Person < ApplicationRecord
 
   # regex text incantations
   abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
-  text_with_spaces        = /\A[a-zA-Z\- ]+\z/
-  text_without_spaces     = /\A[a-zA-Z\-]+\z/
+  text_w_spaces           = /\A[a-zA-Z\- ]+\z/
+  text_wo_spaces          = /\A[a-zA-Z\-]+\z/
 
   # error_messages
-  invalid_text_error = "only letters and hyphens allowed"
-  invalid_abbreviation_error = "only letters and periods are allowed"
-
-  def is_allowed_text?(field, text_pattern)
-    field.match?(text_pattern)
-  end
+  invalid_abbreviation_error  = "only letters and periods are allowed"
+  invalid_text_w_space_error  = "only letters, hyphens, and spaces allowed"
+  invalid_text_wo_space_error = "only letters and hyphens allowed"
 
   def valid_honorific?
     unless self.honorific.nil? or self.honorific.match?(abbreviation_singleton)
@@ -66,7 +63,7 @@ class Person < ApplicationRecord
   def valid_ttus_email?
     ttus_email_pattern = /\A[a-zA-Z0-9\-\.]+@ttu(hsc)?\.edu\z/i
 
-    unless self.ttus_email.nil? or self.ttus_email.match?(ttus_email_pattern)
+    unless self.ttus_email.match?(ttus_email_pattern)
       errors.add(:ttus_email, "Please enter your valid TTU or TTUHSC email.")
     end
   end
