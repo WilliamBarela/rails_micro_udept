@@ -6,7 +6,7 @@ class Person < ApplicationRecord
   has_many :committee_memberships
   has_many :committees, through: :committee_memberships
 
-  validates :last_name, :first_name, :gender, :ttus_email
+  validates :last_name, :first_name, :gender, :ttus_email,
     presence: true,
     on: :update
 
@@ -14,33 +14,31 @@ class Person < ApplicationRecord
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
-  # regex text incantations
-  abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
-  text_w_spaces           = /\A[a-zA-Z\- ]+\z/
-  text_wo_spaces          = /\A[a-zA-Z\-]+\z/
-
-  # error_messages
-  invalid_abbreviation_error  = "only letters and periods are allowed"
-  invalid_text_w_space_error  = "only letters, hyphens, and spaces allowed"
-  invalid_text_wo_space_error = "only letters and hyphens allowed"
-  invalid_text_length_error   = "is improper length"
-
   def valid_name?
+    # error_messages
+    invalid_abbreviation_error  = "only letters and periods are allowed"
+    invalid_text_wo_space_error = "only letters and hyphens allowed"
+    invalid_text_length_error   = "is improper length"
+
+    # regex text incantations
+    abbreviation_singleton  = /\A[a-zA-Z]+\.?\z/
+    text_wo_spaces          = /\A[a-zA-Z\-]+\z/
+
     # honorific and suffix
-    [self.honorific, self.suffix].each do |field|
-      field_sym = field.to_sym
-      unless field.nil?
-        errors.add(field_sym, invalid_abbreviation_error) unless field.match?(abbreviation_singleton)
-        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,4)
+    [:honorific, :suffix].each do |field|
+      field_text = eval(field.to_s)
+      unless field_text.nil?
+        errors.add(field, invalid_abbreviation_error) unless field_text.match?(abbreviation_singleton)
+        errors.add(field, invalid_text_length_error) unless field_text.length.between?(2,4)
       end
     end
 
     # names:
-    [self.first_name, self.middle_name, self.last_name].each do |field|
-      field_sym = field.to_sym
-      unless field.nil?
-        errors.add(field_sym, invalid_text_wo_space_error) unless field.match?(text_wo_spaces)
-        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,50)
+    [:first_name, :middle_name, :last_name].each do |field|
+      field_text = eval(field.to_s)
+      unless field_text.nil?
+        errors.add(field, invalid_text_wo_space_error) unless field_text.match?(text_wo_spaces)
+        errors.add(field, invalid_text_length_error) unless field_text.length.between?(2,50)
       end
     end
   end
@@ -64,7 +62,7 @@ class Person < ApplicationRecord
   def valid_ttus_email?
     ttus_email_pattern = /\A[a-zA-Z0-9\-\.]+@ttu(hsc)?\.edu\z/i
 
-    unless self.ttus_email.match?(ttus_email_pattern)
+    unless self.ttus_email.nil? or self.ttus_email.match?(ttus_email_pattern)
       errors.add(:ttus_email, "Please enter your valid TTU or TTUHSC email.")
     end
   end
