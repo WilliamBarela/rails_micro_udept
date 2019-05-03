@@ -25,20 +25,18 @@ class Person < ApplicationRecord
     text_wo_spaces          = /\A[a-zA-Z\-]+\z/
 
     # honorific and suffix
-    [:honorific, :suffix].each do |field|
-      field_text = eval(field.to_s)
-      unless field_text.nil?
-        errors.add(field, invalid_abbreviation_error) unless field_text.match?(abbreviation_singleton)
-        errors.add(field, invalid_text_length_error) unless field_text.length.between?(2,4)
+    {:honorific => self.honorific, :suffix => self.suffix}.each do |field_sym, field|
+      unless field.nil?
+        errors.add(field_sym, invalid_abbreviation_error) unless field.match?(abbreviation_singleton)
+        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,4)
       end
     end
 
     # names:
-    [:first_name, :middle_name, :last_name].each do |field|
-      field_text = eval(field.to_s)
-      unless field_text.nil?
-        errors.add(field, invalid_text_wo_space_error) unless field_text.match?(text_wo_spaces)
-        errors.add(field, invalid_text_length_error) unless field_text.length.between?(2,50)
+    {:first_name => self.first_name, :middle_name => self.middle_name, :last_name => self.last_name}.each do |field_sym, field|
+      unless field.nil?
+        errors.add(field_sym, invalid_text_wo_space_error) unless field.match?(text_wo_spaces)
+        errors.add(field_sym, invalid_text_length_error) unless field.length.between?(2,50)
       end
     end
   end
