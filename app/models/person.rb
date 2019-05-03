@@ -15,6 +15,12 @@ class Person < ApplicationRecord
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
+  after_initialize :defaults, if: :new_record?
+
+  def defaults
+    self.ttus_phone ||= "8067422715"
+  end
+
   def valid_name?
     # error_messages
     invalid_abbreviation_error  = "only letters and periods are allowed"
@@ -43,10 +49,14 @@ class Person < ApplicationRecord
   end
 
   def valid_gender?
-    gender_options = ["female", "male", "other"]
+    gender_options = [
+      /female/i,
+      /male/i,
+      /other/i
+    ]
 
     unless self.gender.nil? or gender_options.any? {|gender_option| self.gender.match?(gender_option)}
-      error.add(:gender, "Please input gender: female, male or other")
+      errors.add(:gender, "Please input gender: female, male or other")
     end
   end
 
