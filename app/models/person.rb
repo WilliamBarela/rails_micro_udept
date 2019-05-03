@@ -11,6 +11,7 @@ class Person < ApplicationRecord
     on: :update
 
   validate :valid_name?
+  validate :valid_gender?
   validate :valid_ttus_phone?
   validate :valid_ttus_email?
 
