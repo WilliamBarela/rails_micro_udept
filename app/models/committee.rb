@@ -8,6 +8,9 @@ class Committee < ApplicationRecord
   validates :committee_started,
     presence: true, date_not_in_future: true
 
+  validates :committee_depricated,
+    date_not_in_future: true, allow_nil: true
+
   # fields to validate
   # :committee_title
   # :committee_description
