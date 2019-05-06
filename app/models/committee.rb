@@ -5,6 +5,9 @@ class Committee < ApplicationRecord
   validates :committee_title, :committee_description,
     presence: true, string_with_space: true
 
+  validates :committee_started,
+    presence: true
+
   # fields to validate
   # :committee_title
   # :committee_description
