@@ -8,7 +8,7 @@ rails g model FacultyMember current_title:string auxiliary_roles:text objectives
 rails g model StaffMember current_title:string auxiliary_roles:text departmental?:boolean objectives_statement:text departmental_impact_statement:text role_termination_date:date termination_reason:string person:references{index}
 
 # generate GraduateStudent model
-rails g model GraduateStudent current_program:string degree_sought:string auxiliary_roles:string expected_graduation_year:integer expected_graduation_semester:string objectives_statement:text research_interests_summary:text role_termination_date:date termination_reason:string person:references{index}
+rails g model GraduateStudent current_program:string degree_sought:string auxiliary_roles:string expected_graduation_year:integer expected_graduation_semester:string objectives_statement:text research_interests_summary:text role_start_date:date role_termination_date:date termination_reason:string person:references{index}
 
 # generate Committees model:
 rails g model Committee committee_title:string committee_description:text committee_started:date committee_depricated:date
