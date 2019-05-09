@@ -3,7 +3,9 @@ class CommitteeMembership < ApplicationRecord
   belongs_to :committee
 
   validates :role,
-    presence: true, string_with_space: true
+    presence: true,
+    string_with_space: true,
+    length: { maximum: 255 }
 
   validate :join_proceeds_termination
 
