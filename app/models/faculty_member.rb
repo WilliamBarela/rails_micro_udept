@@ -25,7 +25,7 @@ class FacultyMember < ApplicationRecord
 
   def start_proceeds_termination
     unless self.role_termination_date.nil? or self.role_termination_date > self.role_start_date
-      errors.add(:termination_date, "termination date cannot be prior to join date")
+      errors.add(:role_termination_date, "termination date cannot be prior to join date")
     end
   end
 end
