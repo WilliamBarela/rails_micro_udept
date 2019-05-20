@@ -2,7 +2,7 @@ class Committee < ApplicationRecord
   has_many :committee_memberships
   has_many :people, through: :committee_memberships
 
-  validates :committee_title
+  validates :committee_title,
     presence: true,
     string_with_space: true,
     length: { maximum: 255}
