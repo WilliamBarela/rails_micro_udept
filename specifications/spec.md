@@ -8,7 +8,7 @@ Specs:
 - [x] Has >=2 `has_many :through` relationships   
 - [x] Has =1 many-to-many relationship(s) implemented with `has_many :through` relationship ([HABTM is bad](https://flatironschool.com/blog/why-you-dont-need-has-and-belongs-to-many/ "HABTM is bad"))
 - [x] Join table for many-to-many relationship has >= 1 field other than FK which can be submitted by user UI
-- [ ] Models defend against invalid data by the inclusion of validations
+- [x] Models defend against invalid data by the inclusion of validations
 - [ ] Include >=1 class level ActiveRecord scope method [(AR scope reference)](https://guides.rubyonrails.org/active_record_querying.html#scopes "AR scope ref")
 - [ ] Scope method is chainable (i.e., uses ActiveRecord Query method such as `.where`, `.order`, etc.)
 - [ ] Provide standard user authentication (signup, login, logout, passwords)
@@ -38,11 +38,11 @@ Design Goals:
 
 Instructions:
 - [ ] Commit early and often (2..15 lines of code per commit); commit messages are meaningful and accurate
-- [ ] >=30 min coding session record
+- [x] >=30 min coding session record
 - [ ] Checkmark spec.md and comment how specs were fulfilled
 - [ ] Screencast explanation of app usage
 - [ ] Blog project and process
-- [ ] README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Reference and Follow:
 - [ ] [Ruby Style Guide](https://github.com/rubocop-hq/ruby-style-guide "Ruby Style Guide")
