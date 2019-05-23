@@ -1,0 +1,2 @@
+class GraduateAdvisorshipsController < ApplicationController
+end
