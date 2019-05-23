@@ -1,4 +1,4 @@
-class CreateGraduateAdvisorhips < ActiveRecord::Migration[5.2]
+class CreateGraduateAdvisorships < ActiveRecord::Migration[5.2]
   def change
     create_table :graduate_advisorhips, comment: "join table of faculty_members and graduate_students" do |t|
       t.boolean :primary_advisor?, comment: "true, false"
